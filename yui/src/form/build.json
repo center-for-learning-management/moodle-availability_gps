@@ -1,0 +1,10 @@
+{
+  "name": "moodle-availability_gps-form",
+  "builds": {
+    "moodle-availability_gps-form": {
+      "jsfiles": [
+        "form.js"
+      ]
+    }
+  }
+}
