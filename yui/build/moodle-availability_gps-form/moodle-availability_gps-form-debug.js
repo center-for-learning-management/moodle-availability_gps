@@ -85,7 +85,12 @@ M.availability_gps.form.getNode = function(json) {
     // like, but this pattern is used by the existing code.
     if (!M.availability_gps.form.addedEvents) {
         M.availability_gps.form.addedEvents = true;
-        root = Y.one('#fitem_id_availabilityconditionsjson') | Y.one('.availability_gps');
+        root = Y.one('#fitem_id_availabilityconditionsjson');
+        console.log('root #fitem_id_availabilityconditionsjson is', typeof root);
+        if (typeof root == 'undefined') {
+            root = Y.one('.availability_gps');
+            console.log('root .availability_gps is', typeof root);
+        }
         console.log('Delegating Actions on', root);
         if (root) {
             root.delegate('change', function() {
@@ -114,7 +119,7 @@ M.availability_gps.form.fillValue = function(value, node) {
             value[M.availability_gps.vals[a]] = tmp.get('value');
         }
     }
-    console.log('Values to store', value);
+    console.log('Values to fill', value);
 };
 /*
 M.availability_gps.form.fillErrors = function(errors, node) {
