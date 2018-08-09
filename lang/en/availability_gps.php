@@ -22,8 +22,8 @@
  */
 
 $string['description'] = 'Check availability against current GPS coordinates';
-$string['pluginname'] = 'GPS condition';
-$string['title'] = 'GPS condition';
+$string['pluginname'] = 'Geolocation condition';
+$string['title'] = 'Geolocation condition';
 
 
 $string['accuracy'] = 'Accuracy';
