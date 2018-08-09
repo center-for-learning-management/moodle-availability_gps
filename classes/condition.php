@@ -134,8 +134,8 @@ class condition extends \core_availability\condition {
         }
 
         if ($this->reveal == 1) {
-            $hints[] = strtolower(get_string('longitude', 'block_gps')) . ' ' . $this->longitude . ', ' .
-                       strtolower(get_string('latitude', 'block_gps')) . ' ' . $this->latitude;
+            $hints[] = get_string('longitude', 'block_gps') . ' ' . $this->longitude . ', ' .
+                       get_string('latitude', 'block_gps') . ' ' . $this->latitude;
         }
         $hints[] = get_string('accuracy', 'block_gps') . " " . $this->accuracy . " " . get_string('meters', 'block_gps');
         $hints[] = get_string(($this->persistent)?'reached_once':'reached_current', 'block_gps');

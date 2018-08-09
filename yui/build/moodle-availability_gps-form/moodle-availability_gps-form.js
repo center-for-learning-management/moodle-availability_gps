@@ -42,7 +42,7 @@ M.availability_gps.form.getNode = function(json) {
         "    //alert('" + strings.geolocation_not_supported + "');\n" +
         "}\n";
 
-    html = '<div class="availability-gps">';
+    html = '<div class="availability_gps">';
     html += '<span>' + strings.notify_block + '</span>';
     html += '<span><input type="button" value="' + strings.current_location + '" onclick="' + onclick + '" class="ui-btn btn" /></span>';
     html += '<span><label>' + strings.longitude + ' <input type="text" name="longitude" value="' + json.longitude + '"/></label></span>';
@@ -85,13 +85,15 @@ M.availability_gps.form.getNode = function(json) {
     // like, but this pattern is used by the existing code.
     if (!M.availability_gps.form.addedEvents) {
         M.availability_gps.form.addedEvents = true;
-        //root = Y.one('#fitem_id_availabilityconditionsjson');
-        root = Y.one('.availability-gps');
+        root = Y.one('#fitem_id_availabilityconditionsjson') | Y.one('.availability_gps');
         console.log('Delegating Actions on', root);
         if (root) {
             root.delegate('change', function() {
+                console.log('UPDATING!!!');
                 M.core_availability.form.update();
-            }, '.availability_gps input, .availability_gps select');
+            }, '.availability_gps *');
+        } else {
+            console.error('Could not delegate change events for availability_gps');
         }
     }
 
