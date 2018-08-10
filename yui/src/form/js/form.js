@@ -22,60 +22,53 @@ M.availability_gps.form.getNode = function(json) {
         }
     }
 
-    onclick =
-        "if (navigator.geolocation) {\n"+
-        "    M.availability_gps.locatebtn = this;\n"+
-        "    M.availability_gps.locatebtn.value = '" + strings.loading + "...';\n"+
-        "    navigator.geolocation.getCurrentPosition(\n" +
-        "        function(position){\n" +
-        "            M.availability_gps.locatebtn.value = '" + strings.current_location + "';\n"+
-        "            console.log('Position:' , position.coords);\n" +
-        "            M.availability_gps.node.one('[name=longitude]').set('value', position.coords.longitude);\n" +
-        "            M.availability_gps.node.one('[name=latitude]').set('value', position.coords.latitude);\n" +
-        "            M.core_availability.form.update();\n" +
-        "        }\n" +
-        "    );\n" +
-        "} else {\n" +
-        "    M.availability_gps.locatebtn.value = '" + strings.geolocation_not_supported + "';\n"+
-        "    //alert('" + strings.geolocation_not_supported + "');\n" +
-        "}\n";
-
     html = '<div class="availability_gps">';
-    html += '<span>' + strings.notify_block + '</span>';
-    html += '<span><input type="button" value="' + strings.current_location + '" onclick="' + onclick + '" class="ui-btn btn" /></span>';
-    html += '<span><label>' + strings.longitude + ' <input type="text" name="longitude" value="' + json.longitude + '"/></label></span>';
-    html += '<span><label>' + strings.latitude + ' <input type="text" name="latitude" value="' + json.latitude + '"/></label></span>';
-    html += '<span><label>' + strings.accuracy + ' <select name="accuracy">';
+    html += '<div>' + strings.notify_block + '</div>';
+    html += '<input type="button" value="' + strings.selectfrommap + '" class="ui-btn btn" onclick="';
+    html += '    availability_gps_helper.init(' + json.latitude + ',' + json.longitude + ');">';
+    html += '<div>';
+    html += '<label>' + strings.longitude + ' <input type="text" name="longitude" value="' + json.longitude + '"/></label>';
+    html += '<label>' + strings.latitude + ' <input type="text" name="latitude" value="' + json.latitude + '"/></label>';
+    html += '<label>' + strings.accuracy + ' <select name="accuracy">';
     options = [5, 10, 50, 100, 500, 1000];
     for (a = 0; a < options.length; a++) {
         selected = ((json.accuracy == options[a])?' selected':'');
         html += '   <option value="' + options[a] + '"' + selected + '>' + options[a] + ' ' + strings.meters + '</option>';
     }
-    html += '</select></label></span>';
-    html += '<span><label>' + strings.persistent + ' <select name="persistent">';
+    html += '</select></label>';
+    html += '</div>';
+    html += '<div>';
+    html += '<label>' + strings.persistent + ' <select name="persistent">';
     options = [0, 1];
     labels = [strings.no, strings.yes];
     for (a = 0; a < options.length; a++) {
         selected = ((json.persistent == options[a])?' selected':'');
         html += '   <option value="' + options[a] + '"' + selected + '>' + labels[a] + '</option>';
     }
-    html += '</select></label></span>';
-    html += '<span><label>' + strings.reveal + '<select name="reveal">';
+    html += '</select></label>';
+    html += '<label>' + strings.reveal + '<select name="reveal">';
     options = [0, 1];
     labels = [strings.no, strings.yes];
     for (a = 0; a < options.length; a++) {
         selected = ((json.reveal == options[a])?' selected':'');
         html += '   <option value="' + options[a] + '"' + selected + '>' + labels[a] + '</option>';
     }
-    html += '</select></label></span>';
-    html += '<span><label>' + strings.revealname + '<select name="revealname">';
+    html += '</select></label>';
+    html += '<label>' + strings.revealname + '<select name="revealname">';
     options = [0, 1];
     labels = [strings.no, strings.yes];
     for (a = 0; a < options.length; a++) {
         selected = ((json.revealname == options[a])?' selected':'');
         html += '   <option value="' + options[a] + '"' + selected + '>' + labels[a] + '</option>';
     }
-    html += '</select></label></span>';
+    html += '</select></label>';
+    html += '</div>';
+    html += '<div id="availability_gps_map_info" class="closed">';
+    html += strings.selectfrommapdrag;
+    html += '<input type="button" value="' + strings.current_location + '" onclick="availability_gps_helper.current();" class="ui-btn btn" />';
+    html += '</div>';
+    html += '<div id="availability_gps_map" class="closed" style="height: 440px; border: 1px solid #AAA;">';
+    html += '</div>';
     html += '</div>';
     M.availability_gps.node = Y.Node.create(html);
 

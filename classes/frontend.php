@@ -35,13 +35,19 @@
          return array(
             "accuracy", "current_location", "geolocation_not_supported",
             "latitude", "loading", "longitude", "meters", "no", "notify_block",
-            "persistent", "reveal", "revealname", "yes"
+            "persistent", "reveal", "revealname", "selectfrommap", "selectfrommapdrag", "yes"
         );
      }
 
      protected function get_javascript_init_params($course, \cm_info $cm = null,
              \section_info $section = null) {
-         return array(0, 0, 50, 0, 1, 1);
+         global $CFG, $PAGE;
+         $PAGE->requires->js(new \moodle_url($CFG->wwwroot . '/blocks/gps/js/leaflet.js'));
+         $PAGE->requires->js(new \moodle_url($CFG->wwwroot . '/blocks/gps/js/main.js'));
+         $PAGE->requires->css(new \moodle_url($CFG->wwwroot . '/blocks/gps/css/leaflet.css'));
+         $PAGE->requires->css(new \moodle_url($CFG->wwwroot . '/blocks/gps/css/main.css'));
+
+         return array(0, 0, 50, 0, 1, 1, $CFG->wwwroot);
      }
 
      protected function allow_add($course, \cm_info $cm = null,

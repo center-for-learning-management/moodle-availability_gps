@@ -39,4 +39,6 @@ $string['notify_block'] = 'Die Voraussetzung kann hier jederzeit gesetzt werden,
 $string['persistent'] = 'Freischaltung merken';
 $string['reveal'] = 'Position sichtbar';
 $string['revealname'] = 'Name sichtbar';
+$string['selectfrommap'] = 'Von Landkarte wählen';
+$string['selectfrommapdrag'] = 'Marker verschieben für neue Position';
 $string['yes'] = 'Ja';

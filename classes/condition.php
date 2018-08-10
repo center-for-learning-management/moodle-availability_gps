@@ -42,6 +42,7 @@ class condition extends \core_availability\condition {
     protected $reveal; // Whether or not to show coordinates to users.
 
     public function __construct($structure) {
+        global $CFG;
         $this->accuracy = $structure->accuracy;
         $this->longitude = $structure->longitude;
         $this->latitude = $structure->latitude;

@@ -39,4 +39,6 @@ $string['notify_block'] = 'You can always set the condition here, but you need t
 $string['persistent'] = 'Persistent';
 $string['reveal'] = 'Reveal position';
 $string['revealname'] = 'Reveal name';
+$string['selectfrommap'] = 'Select from map';
+$string['selectfrommapdrag'] = 'Drag marker for new location';
 $string['yes'] = 'Yes';
