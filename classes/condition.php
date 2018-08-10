@@ -152,7 +152,7 @@ class condition extends \core_availability\condition {
         );
         $distance = \availability_gps\block_gps_lib::get_distance($userposition, $conditionposition);
         if ($distance > -1) {
-            $hints[] = get_string('distance', 'block_gps') . ' ' . round($distance, 0) . ' ' . get_string('meters', 'block_gps');
+            $hints[] = get_string('distance', 'block_gps') . ' ' . number_format($distance, 0, ',', '.') . ' ' . get_string('meters', 'block_gps');
         }
 
         return implode(", ", $hints);
