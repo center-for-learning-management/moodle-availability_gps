@@ -52,11 +52,17 @@
 
      protected function allow_add($course, \cm_info $cm = null,
              \section_info $section = null) {
-         // This function lets you control whether the 'add' button for your
-         // plugin appears. For example, the grouping plugin does not appear
-         // if there are no groupings on the course. This helps to simplify
-         // the user interface. If you don't include this function, it will
-         // appear.
-         return true;
+         global $CFG;
+         require_once($CFG->dirroot . '/blocks/gps/lib.php');
+         if ($section != null) {
+             $o = $section;
+             $idtype = 'sectionid';
+         }
+         if ($cm != null) {
+             $o = $cm;
+             $idtype = 'cmid';
+         }
+         $positions = \availability_gps\block_gps_lib::load_position_condition($o, $idtype);
+         return count($positions) == 0;
      }
  }

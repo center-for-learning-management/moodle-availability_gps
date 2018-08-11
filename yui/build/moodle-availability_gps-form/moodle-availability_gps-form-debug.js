@@ -7,7 +7,7 @@ M.availability_gps.vals = [ 'accuracy', 'longitude', 'latitude', 'persistent', '
 M.availability_gps.form = Y.Object(M.core_availability.plugin);
 
 M.availability_gps.form.initInner = function(longitude, latitude, accuracy, persistent, reveal, revealname) {
-    console.log('initInner: ', longitude, latitude, accuracy, persistent, reveal, revealname);
+    //console.log('initInner: ', longitude, latitude, accuracy, persistent, reveal, revealname);
 };
 
 M.availability_gps.form.getNode = function(json) {
@@ -74,25 +74,11 @@ M.availability_gps.form.getNode = function(json) {
     html += '</div>';
     M.availability_gps.node = Y.Node.create(html);
 
-    // Add event handlers (first time only). You can do this any way you
-    // like, but this pattern is used by the existing code.
     if (!M.availability_gps.form.addedEvents) {
         M.availability_gps.form.addedEvents = true;
-        root = Y.one('#fitem_id_availabilityconditionsjson');
-        console.log('root #fitem_id_availabilityconditionsjson is', typeof root);
-        if (typeof root == 'undefined') {
-            root = Y.one('.availability_gps');
-            console.log('root .availability_gps is', typeof root);
-        }
-        console.log('Delegating Actions on', root);
-        if (root) {
-            root.delegate('change', function() {
-                console.log('UPDATING!!!');
-                M.core_availability.form.update();
-            }, '.availability_gps *');
-        } else {
-            console.error('Could not delegate change events for availability_gps');
-        }
+        M.availability_gps.node.delegate('change', function() {
+            M.core_availability.form.update();
+        }, '*[name]');
     }
 
     return M.availability_gps.node;
@@ -107,12 +93,10 @@ M.availability_gps.form.fillValue = function(value, node) {
     var tmp, a;
     for(a = 0; a < M.availability_gps.vals.length; a++) {
         tmp = node.one('*[name=' + M.availability_gps.vals[a] + ']');
-        console.log('Item for ', M.availability_gps.vals[a], tmp);
         if (tmp) {
             value[M.availability_gps.vals[a]] = tmp.get('value');
         }
     }
-    console.log('Values to fill', value);
 };
 /*
 M.availability_gps.form.fillErrors = function(errors, node) {
