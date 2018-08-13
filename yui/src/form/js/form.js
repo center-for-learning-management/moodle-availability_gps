@@ -6,6 +6,22 @@ M.availability_gps.form = Y.Object(M.core_availability.plugin);
 
 M.availability_gps.form.initInner = function(longitude, latitude, accuracy, persistent, reveal, revealname) {
     //console.log('initInner: ', longitude, latitude, accuracy, persistent, reveal, revealname);
+    require(['core/url'], function(url) {
+        var l1 = document.createElement( "link" );
+        var l2 = document.createElement( "link" );
+
+        l1.href = url.relativeUrl('/blocks/gps/css/leaflet.css');
+        l1.type = "text/css";
+        l1.rel = "stylesheet";
+        l1.media = "screen,print";
+        l2.href = url.relativeUrl('/blocks/gps/css/main.css');
+        l2.type = "text/css";
+        l2.rel = "stylesheet";
+        l2.media = "screen,print";
+
+        document.getElementsByTagName( "head" )[0].appendChild( l1 );
+        document.getElementsByTagName( "head" )[0].appendChild( l2 );
+    });
 };
 
 M.availability_gps.form.getNode = function(json) {
