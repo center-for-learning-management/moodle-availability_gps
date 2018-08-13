@@ -26,7 +26,6 @@
  defined('MOODLE_INTERNAL') || die();
 
  class frontend extends \core_availability\frontend {
-
      protected function get_javascript_strings() {
          // You can return a list of names within your language file and the
          // system will include them here. (Should you need strings from another
@@ -54,15 +53,19 @@
              \section_info $section = null) {
          global $CFG;
          require_once($CFG->dirroot . '/blocks/gps/lib.php');
-         if ($section != null) {
-             $o = $section;
-             $idtype = 'sectionid';
+         if (substr($CFG->wwwroot, 0, 6) != 'https:') {
+             return false;
+         } else {
+             if ($section != null) {
+                 $o = $section;
+                 $idtype = 'sectionid';
+             }
+             if ($cm != null) {
+                 $o = $cm;
+                 $idtype = 'cmid';
+             }
+             $positions = \availability_gps\block_gps_lib::load_position_condition($o, $idtype);
+             return count($positions) == 0;
          }
-         if ($cm != null) {
-             $o = $cm;
-             $idtype = 'cmid';
-         }
-         $positions = \availability_gps\block_gps_lib::load_position_condition($o, $idtype);
-         return count($positions) == 0;
      }
  }
