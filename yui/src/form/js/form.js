@@ -5,15 +5,16 @@ M.availability_gps.vals = [ 'accuracy', 'longitude', 'latitude', 'persistent', '
 M.availability_gps.form = Y.Object(M.core_availability.plugin);
 
 M.availability_gps.form.initInner = function(longitude, latitude, accuracy, persistent, reveal, revealname) {
-    //console.log('initInner: ', longitude, latitude, accuracy, persistent, reveal, revealname);
+    console.log('initInner: ', longitude, latitude, accuracy, persistent, reveal, revealname);
     require(['core/url'], function(url) {
-        var l1 = document.createElement( "link" );
-        var l2 = document.createElement( "link" );
-
+        var l1, l2;
+        l1 = document.createElement('link');
         l1.href = url.relativeUrl('/blocks/gps/css/leaflet.css');
         l1.type = "text/css";
         l1.rel = "stylesheet";
         l1.media = "screen,print";
+
+        l2 = document.createElement('link');
         l2.href = url.relativeUrl('/blocks/gps/css/main.css');
         l2.type = "text/css";
         l2.rel = "stylesheet";
@@ -25,7 +26,7 @@ M.availability_gps.form.initInner = function(longitude, latitude, accuracy, pers
 };
 
 M.availability_gps.form.getNode = function(json) {
-    var a, html, onclick, options, labels, root, selected, strings, url;
+    var a, html, options, labels, selected, strings;
     // This function does the main work. It gets called after the user
     // chooses to add an availability restriction of this type. You have
     // to return a YUI node representing the HTML for the plugin controls.
@@ -41,7 +42,9 @@ M.availability_gps.form.getNode = function(json) {
     html = '<div class="availability_gps">';
     html += '<div>' + strings.notify_block + '</div>';
     html += '<input type="button" value="' + strings.selectfrommap + '" class="ui-btn btn" onclick="';
-    html += '    availability_gps_helper.init(' + json.latitude + ',' + json.longitude + ');">';
+    html += '    require([\'block_gps/geoassist\'], function(helper) {';
+    html += '        helper.init(' + json.latitude + ',' + json.longitude + ');';
+    html += '    });">';
     html += '<div>';
     html += '<label>' + strings.longitude + ' <input type="text" name="longitude" value="' + json.longitude + '"/></label>';
     html += '<label>' + strings.latitude + ' <input type="text" name="latitude" value="' + json.latitude + '"/></label>';
@@ -81,7 +84,11 @@ M.availability_gps.form.getNode = function(json) {
     html += '</div>';
     html += '<div id="availability_gps_map_info" class="closed">';
     html += strings.selectfrommapdrag;
-    html += '<input type="button" value="' + strings.current_location + '" onclick="availability_gps_helper.current();" class="ui-btn btn" />';
+    html += '<input type="button" value="' + strings.current_location + '" onclick="';
+    html += '    require([\'block_gps/geoassist\'], function(helper) {';
+    html += '        helper.current(this);';
+    html += '    });"';
+    html += '    class="ui-btn btn" />';
     html += '</div>';
     html += '<div id="availability_gps_map" class="closed" style="height: 440px; border: 1px solid #AAA;">';
     html += '</div>';

@@ -40,9 +40,7 @@
 
      protected function get_javascript_init_params($course, \cm_info $cm = null,
              \section_info $section = null) {
-         global $CFG, $PAGE;
-         $PAGE->requires->js(new \moodle_url($CFG->wwwroot . '/blocks/gps/js/leaflet.js'));
-         $PAGE->requires->js(new \moodle_url($CFG->wwwroot . '/blocks/gps/js/main.js'));
+         global $CFG;
 
          return array(0, 0, 50, 0, 1, 1, $CFG->wwwroot);
      }
