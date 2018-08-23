@@ -25,6 +25,8 @@
 
  defined('MOODLE_INTERNAL') || die();
 
+require_once($CFG->dirroot . '/blocks/gps/lib.php');
+
  class frontend extends \core_availability\frontend {
      protected function get_javascript_strings() {
          // You can return a list of names within your language file and the
@@ -48,7 +50,7 @@
      protected function allow_add($course, \cm_info $cm = null,
              \section_info $section = null) {
          global $CFG;
-         require_once($CFG->dirroot . '/blocks/gps/lib.php');
+
          if (substr($CFG->wwwroot, 0, 6) != 'https:') {
              return false;
          } else {

@@ -26,6 +26,9 @@ namespace availability_gps;
 
 defined('MOODLE_INTERNAL') || die();
 
+require_once($CFG->dirroot . '/blocks/gps/block_gps.php');
+require_once($CFG->dirroot . '/blocks/gps/lib.php');
+
 /**
  * Condition main class.
  *
@@ -75,7 +78,7 @@ class condition extends \core_availability\condition {
             \core_availability\info $info, $grabthelot, $userid) {
         // This function needs to check whether the condition is true
         // or not for the user specified in $userid.
-        global $CFG, $DB, $SESSION;
+        global $CFG, $DB;
         $cmid = 0; $sectionid = 0;
         if (method_exists($info, 'get_section')) {
             $section = $info->get_section();
@@ -86,10 +89,9 @@ class condition extends \core_availability\condition {
             $cmid = $module->id;
         }
 
-        require_once($CFG->dirroot . '/blocks/gps/lib.php');
         $userposition = (object)array(
-            'longitude' => $SESSION->availability_gps_longitude,
-            'latitude' => $SESSION->availability_gps_latitude,
+            'longitude' => \block_gps::get_location('longitude'),
+            'latitude' => \block_gps::get_location('latitude'),
         );
         $conditionposition = (object)array(
             'longitude' => $this->longitude,
@@ -98,9 +100,10 @@ class condition extends \core_availability\condition {
         $distance = \availability_gps\block_gps_lib::get_distance($userposition, $conditionposition);
         $chkdist = ($distance > -1 && $distance < $this->accuracy);
 
+        $chkpersistent = false;
         if($userid > 0 && ($cmid > 0 || $sectionid > 0)) {
             $entry = $DB->get_record('block_gps_reached', array('cmid' => $cmid, 'userid' => $userid, 'sectionid' => $sectionid));
-            if ($entry->id && $entry->id > 0) {
+            if (isset($entry->id) && $entry->id > 0) {
                 $chkpersistent = true;
             } elseif ($chkdist && (!isset($this->warning_edit_required) || !$this->warning_edit_required)) {
                 $entry = (object) array(
@@ -122,7 +125,7 @@ class condition extends \core_availability\condition {
     }
 
     public function get_description($full, $not, \core_availability\info $info) {
-        global $CFG, $SESSION;
+        global $CFG;
         // This function just returns the information that shows about
         // the condition on editing screens. Usually it is similar to
         // the information shown if the user doesn't meet the
@@ -141,10 +144,9 @@ class condition extends \core_availability\condition {
         $hints[] = get_string('accuracy', 'block_gps') . " " . $this->accuracy . " " . get_string('meters', 'block_gps');
         $hints[] = get_string(($this->persistent)?'reached_once':'reached_current', 'block_gps');
 
-        require_once($CFG->dirroot . '/blocks/gps/lib.php');
         $userposition = (object)array(
-            'longitude' => @$SESSION->availability_gps_longitude,
-            'latitude' => @$SESSION->availability_gps_latitude,
+            'longitude' => \block_gps::get_location('longitude'),
+            'latitude' => \block_gps::get_location('latitude'),
         );
         $conditionposition = (object)array(
             'longitude' => $this->longitude,

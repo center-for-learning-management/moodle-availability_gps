@@ -46,8 +46,8 @@ M.availability_gps.form.getNode = function(json) {
     html += '        helper.init(' + json.latitude + ',' + json.longitude + ');';
     html += '    });">';
     html += '<div>';
-    html += '<label>' + strings.longitude + ' <input type="text" name="longitude" value="' + json.longitude + '"/></label>';
     html += '<label>' + strings.latitude + ' <input type="text" name="latitude" value="' + json.latitude + '"/></label>';
+    html += '<label>' + strings.longitude + ' <input type="text" name="longitude" value="' + json.longitude + '"/></label>';
     html += '<label>' + strings.accuracy + ' <select name="accuracy">';
     options = [5, 10, 50, 100, 500, 1000];
     for (a = 0; a < options.length; a++) {
