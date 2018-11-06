@@ -42,3 +42,9 @@ $string['revealname'] = 'Reveal name';
 $string['selectfrommap'] = 'Select from map';
 $string['selectfrommapdrag'] = 'Drag marker for new location';
 $string['yes'] = 'Yes';
+
+$string['privacy:metadata:block_gps_reached'] = 'Stores if a user reached a specific condition.';
+$string['privacy:metadata:block_gps_reached:cmid'] = 'Coursemodule ID';
+$string['privacy:metadata:block_gps_reached:sectionid'] = 'Section ID';
+$string['privacy:metadata:block_gps_reached:userid'] = 'UserID';
+$string['privacy:metadata:block_gps_reached:firstreach'] = 'The first time you reached this condition';
