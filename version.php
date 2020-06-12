@@ -23,8 +23,8 @@
 
 defined('MOODLE_INTERNAL') || die;
 
-$plugin->version  = 2019102800;
+$plugin->version  = 2020061200;
 $plugin->requires = 2014051200;  // Requires Moodle 2.7.
 $plugin->component = 'availability_gps';
-$plugin->release = '1.7 (Build: 2019102800)';
+$plugin->release = '1.7 (Build: 2020061200)';
 $plugin->maturity = MATURITY_STABLE;
