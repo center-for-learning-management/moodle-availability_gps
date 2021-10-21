@@ -101,7 +101,7 @@ class condition extends \core_availability\condition {
         $chkdist = ($distance > -1 && $distance < $this->accuracy);
 
         $chkpersistent = false;
-        if($userid > 0 && ($cmid > 0 || $sectionid > 0)) {
+        if($userid > 1 && ($cmid > 0 || $sectionid > 0)) {
             $entry = $DB->get_record('block_gps_reached', array('cmid' => $cmid, 'userid' => $userid, 'sectionid' => $sectionid));
             if (isset($entry->id) && $entry->id > 0) {
                 $chkpersistent = true;
