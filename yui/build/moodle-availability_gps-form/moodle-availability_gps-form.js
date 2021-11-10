@@ -1,5 +1,3 @@
-YUI.add('moodle-availability_gps-form', function (Y, NAME) {
-
 M.availability_gps = M.availability_gps || {};
 
 M.availability_gps.vals = [ 'accuracy', 'longitude', 'latitude', 'persistent', 'reveal', 'revealname'];
@@ -51,10 +49,13 @@ M.availability_gps.form.getNode = function(json) {
     html += '<label>' + strings.latitude + ' <input type="text" name="latitude" value="' + json.latitude + '"/></label>';
     html += '<label>' + strings.longitude + ' <input type="text" name="longitude" value="' + json.longitude + '"/></label>';
     html += '<label>' + strings.accuracy + ' <select name="accuracy">';
-    options = [5, 10, 50, 100, 500, 1000];
+    var options = [5, 10, 50, 100, 500, 1000, 5000, 10000, 20000];
+    var sm = ' ' + strings.meters;
+    var sk = ' ' + strings.kilometers;
+    var captions = ['5'+sm, '10'+sm, '50'+sm, '100'+sm, '500'+sm, '1'+sk, '5'+sk, '10'+sk, '20'+sk];
     for (a = 0; a < options.length; a++) {
         selected = ((json.accuracy == options[a])?' selected':'');
-        html += '   <option value="' + options[a] + '"' + selected + '>' + options[a] + ' ' + strings.meters + '</option>';
+        html += '   <option value="' + options[a] + '"' + selected + '>' + captions[a] + '</option>';
     }
     html += '</select></label>';
     html += '</div>';
@@ -131,6 +132,3 @@ M.availability_gps.form.fillErrors = function(errors, node) {
     }
 };
 */
-
-
-}, '@VERSION@', {"requires": ["base", "node", "event", "moodle-core_availability-form"]});

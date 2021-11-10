@@ -33,6 +33,7 @@ $string['geolocation_not_supported'] = 'Positionierung wird nicht unterstützt';
 $string['latitude'] = 'Breitengrad';
 $string['loading'] = 'lade';
 $string['longitude'] = 'Längengrad';
+$string['kilometers'] = 'Kilometer';
 $string['meters'] = 'Meter';
 $string['no'] = 'Nein';
 $string['notify_block'] = 'Die Voraussetzung kann hier jederzeit gesetzt werden, allerdings wird der "Geolocation Block" benötigt, um die Position zu bestimmen!';

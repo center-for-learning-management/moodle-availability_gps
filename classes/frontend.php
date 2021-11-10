@@ -34,7 +34,7 @@ require_once($CFG->dirroot . '/blocks/gps/lib.php');
          // language file, you can also call $PAGE->requires->strings_for_js
          // manually from here.)
          return array(
-            "accuracy", "current_location", "geolocation_not_supported",
+            "accuracy", "current_location", "geolocation_not_supported", "kilometers",
             "latitude", "loading", "longitude", "meters", "no", "notify_block",
             "persistent", "reveal", "revealname", "selectfrommap", "selectfrommapdrag", "yes"
         );

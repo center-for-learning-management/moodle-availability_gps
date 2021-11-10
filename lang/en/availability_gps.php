@@ -33,6 +33,7 @@ $string['geolocation_not_supported'] = 'Geolocation not supported';
 $string['latitude'] = 'Latitude';
 $string['loading'] = 'loading';
 $string['longitude'] = 'Longitude';
+$string['kilometers'] = 'Kilometers';
 $string['meters'] = 'Meters';
 $string['no'] = 'No';
 $string['notify_block'] = 'You can always set the condition here, but you need to add the block for this plugin to work!';
