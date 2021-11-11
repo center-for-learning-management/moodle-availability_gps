@@ -28,6 +28,7 @@ $string['title'] = 'Geolocation condition';
 
 $string['accuracy'] = 'Accuracy';
 $string['current_location'] = 'Current Location';
+$string['current_location_set'] = 'Set to current location';
 $string['geolocation'] = 'Geolocation';
 $string['geolocation_not_supported'] = 'Geolocation not supported';
 $string['latitude'] = 'Latitude';
@@ -36,11 +37,11 @@ $string['longitude'] = 'Longitude';
 $string['kilometers'] = 'Kilometers';
 $string['meters'] = 'Meters';
 $string['no'] = 'No';
-$string['notify_block'] = 'You can always set the condition here, but you need to add the block for this plugin to work!';
+$string['notify_block'] = 'You can always set the condition here, we recommend to enable also the block geolocation in your course!';
 $string['persistent'] = 'Persistent';
 $string['reveal'] = 'Reveal position';
 $string['revealname'] = 'Reveal name';
-$string['selectfrommap'] = 'Select from map';
+$string['selectfrommap'] = 'Show map';
 $string['selectfrommapdrag'] = 'Drag marker for new location';
 $string['yes'] = 'Yes';
 
