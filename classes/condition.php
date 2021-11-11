@@ -56,7 +56,12 @@ class condition extends \core_availability\condition {
         $this->revealname = $structure->revealname;
 
         if (!self::$locationchecked) {
-            $PAGE->requires->js_call_amd('block_gps/geoassist', 'locate');
+            $data = [
+                'altitude' => \block_gps::get_location('altitude'),
+                'latitude' => \block_gps::get_location('latitude'),
+                'longitude' => \block_gps::get_location('longitude'),
+            ];
+            $PAGE->requires->js_call_amd('block_gps/geoassist', 'locate', $data);
             self::$locationchecked = true;
         }
     }
