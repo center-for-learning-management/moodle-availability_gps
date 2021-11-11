@@ -21,39 +21,35 @@
  * @copyright 2014 The Open University
  * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
- namespace availability_gps;
+namespace availability_gps;
 
- defined('MOODLE_INTERNAL') || die();
+defined('MOODLE_INTERNAL') || die();
 
-require_once($CFG->dirroot . '/blocks/gps/lib.php');
-
- class frontend extends \core_availability\frontend {
-     protected function get_javascript_strings() {
-         // You can return a list of names within your language file and the
-         // system will include them here. (Should you need strings from another
-         // language file, you can also call $PAGE->requires->strings_for_js
-         // manually from here.)
-         return array(
+class frontend extends \core_availability\frontend {
+    protected function get_javascript_strings() {
+        // You can return a list of names within your language file and the
+        // system will include them here. (Should you need strings from another
+        // language file, you can also call $PAGE->requires->strings_for_js
+        // manually from here.)
+        return array(
             "accuracy", "current_location_set", "geolocation_not_supported", "kilometers",
             "latitude", "loading", "longitude", "meters", "no", "notify_block",
             "persistent", "reveal", "revealname", "selectfrommap", "selectfrommapdrag", "yes"
         );
-     }
+    }
 
-     protected function get_javascript_init_params($course, \cm_info $cm = null,
-             \section_info $section = null) {
-         global $CFG;
+    protected function get_javascript_init_params($course, \cm_info $cm = null, \section_info $section = null) {
+        global $CFG;
 
-         return array(0, 0, 50, 0, 1, 1, $CFG->wwwroot);
-     }
+        return array(0, 0, 50, 0, 1, 1, $CFG->wwwroot);
+    }
 
-     protected function allow_add($course, \cm_info $cm = null,
-             \section_info $section = null) {
-         global $CFG;
+    protected function allow_add($course, \cm_info $cm = null, \section_info $section = null) {
+        global $CFG;
 
-         if (substr($CFG->wwwroot, 0, 6) != 'https:') {
+        if (substr($CFG->wwwroot, 0, 6) != 'https:') {
             return false;
-         } else {
+        } else {
             $positions = array();
             $o = (object)array();
             $idtype = '';
@@ -65,8 +61,8 @@ require_once($CFG->dirroot . '/blocks/gps/lib.php');
                 $o = $cm;
                 $idtype = 'cmid';
             }
-            $positions = \availability_gps\block_gps_lib::load_position_condition($o, $idtype);
+            $positions = \block_gps\locallib::load_position_condition($o, $idtype);
             return count($positions) == 0;
-         }
-     }
- }
+        }
+    }
+}

@@ -26,9 +26,6 @@ namespace availability_gps;
 
 defined('MOODLE_INTERNAL') || die();
 
-require_once($CFG->dirroot . '/blocks/gps/block_gps.php');
-require_once($CFG->dirroot . '/blocks/gps/lib.php');
-
 /**
  * Condition main class.
  *
@@ -44,8 +41,6 @@ class condition extends \core_availability\condition {
     protected $persistent; // Stay visible when detected once.
     protected $reveal; // Whether or not to show coordinates to users.
 
-    private static $locationchecked = false;
-
     public function __construct($structure) {
         global $CFG, $PAGE;
         $this->accuracy = $structure->accuracy;
@@ -55,14 +50,20 @@ class condition extends \core_availability\condition {
         $this->reveal = $structure->reveal;
         $this->revealname = $structure->revealname;
 
-        if (!self::$locationchecked) {
-            $data = [
-                'altitude' => \block_gps::get_location('altitude'),
-                'latitude' => \block_gps::get_location('latitude'),
-                'longitude' => \block_gps::get_location('longitude'),
-            ];
-            $PAGE->requires->js_call_amd('block_gps/geoassist', 'locate', $data);
-            self::$locationchecked = true;
+        $initialized = \block_gps\locallib::cache_get('request', 'location_initialized');
+        $askedonce = \block_gps\locallib::cache_get('session', 'asked_for_location_once');
+        $setinterval = \block_gps\locallib::cache_get('session', 'setinterval');
+
+        if (empty($initialized)) {
+            $PAGE->requires->js_call_amd('block_gps/geoassist', 'locateInit', \block_gps\locallib::get_location());
+            \block_gps\locallib::cache_set('request', 'location_initialized', true);
+            if (!empty($setinterval)) {
+                $PAGE->requires->js_call_amd('block_gps/geoassist', 'interval', [ 'ms' => $setinterval]);
+            }
+        }
+        if (empty($askedonce)) {
+            $PAGE->requires->js_call_amd('block_gps/geoassist', 'locate');
+            \block_gps\locallib::cache_set('session', 'asked_for_location_once', true);
         }
     }
 
@@ -96,14 +97,14 @@ class condition extends \core_availability\condition {
         }
 
         $userposition = (object)array(
-            'longitude' => \block_gps::get_location('longitude'),
-            'latitude' => \block_gps::get_location('latitude'),
+            'longitude' => \block_gps\locallib::get_location('longitude'),
+            'latitude' => \block_gps\locallib::get_location('latitude'),
         );
         $conditionposition = (object)array(
             'longitude' => $this->longitude,
             'latitude' => $this->latitude,
         );
-        $distance = \availability_gps\block_gps_lib::get_distance($userposition, $conditionposition);
+        $distance = \block_gps\locallib::get_distance($userposition, $conditionposition);
         $chkdist = ($distance > -1 && $distance < $this->accuracy);
 
         $chkpersistent = false;
@@ -135,14 +136,14 @@ class condition extends \core_availability\condition {
         global $CFG, $OUTPUT;
 
         $userposition = (object)array(
-            'longitude' => \block_gps::get_location('longitude'),
-            'latitude' => \block_gps::get_location('latitude'),
+            'longitude' => \block_gps\locallib::get_location('longitude'),
+            'latitude' => \block_gps\locallib::get_location('latitude'),
         );
         $conditionposition = (object)array(
             'longitude' => $this->longitude,
             'latitude' => $this->latitude,
         );
-        $distance = \availability_gps\block_gps_lib::get_distance($userposition, $conditionposition);
+        $distance = \block_gps\locallib::get_distance($userposition, $conditionposition);
 
         $params = (object)[
             'accuracy' => ($this->accuracy > 1000) ? $this->accuracy/1000 : $this->accuracy,
