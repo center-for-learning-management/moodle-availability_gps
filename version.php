@@ -23,10 +23,10 @@
 
 defined('MOODLE_INTERNAL') || die;
 
-$plugin->version  = 2021111103;
+$plugin->version  = 2021111200;
 $plugin->requires = 2014051200;  // Requires Moodle 2.7.
 $plugin->component = 'availability_gps';
-$plugin->release = '2.2.2';
+$plugin->release = '2.2.3';
 $plugin->maturity = MATURITY_STABLE;
 $plugin->dependencies = array(
     'block_gps' => 2021111100,
