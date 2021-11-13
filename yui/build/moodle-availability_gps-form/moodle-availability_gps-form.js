@@ -41,8 +41,8 @@ YUI.add('moodle-availability_gps-form', function (Y, NAME) {
             }
         }
 
-        var requiremap = 'require([\'block_gps/geoassist\'], function(helper) { helper.init(true);});';
-        var requirehelper = 'require([\'block_gps/geoassist\'], function(helper) { helper.current(this); });';
+        var requiremap = 'require([\'block_gps/conditionassistant\'], function(helper) { helper.init(true);});';
+        var requirehelper = 'require([\'block_gps/conditionassistant\'], function(helper) { helper.current(this); });';
 
         var checkedpersistent = (json.persistent == 1) ? ' checked="checked"' : '';
         var checkedreveal = (json.reveal == 1) ? ' checked="checked"' : '';
@@ -110,18 +110,18 @@ YUI.add('moodle-availability_gps-form', function (Y, NAME) {
             root.delegate('change', function() {
                 // For the grade item, just update the form fields.
                 M.core_availability.form.update();
-                require(['block_gps/geoassist'], function(helper) { helper.initIfShown();});
+                require(['block_gps/conditionassistant'], function(helper) { helper.initIfShown();});
             }, '.availability_gps select');
 
             root.delegate('click', function() {
                 M.core_availability.form.update();
-                require(['block_gps/geoassist'], function(helper) { helper.initIfShown();});
+                require(['block_gps/conditionassistant'], function(helper) { helper.initIfShown();});
             }, '.availability_gps input[type=checkbox]');
 
             root.delegate('valuechange', function() {
                 // For grade values, just update the form fields.
                 M.core_availability.form.update();
-                require(['block_gps/geoassist'], function(helper) { helper.initIfShown();});
+                require(['block_gps/conditionassistant'], function(helper) { helper.initIfShown();});
             }, '.availability_gps input');
         }
         M.availability_gps.node = node;
@@ -156,7 +156,6 @@ YUI.add('moodle-availability_gps-form', function (Y, NAME) {
         }
     };
     */
-
 
 
 

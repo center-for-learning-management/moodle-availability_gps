@@ -158,7 +158,7 @@ class condition extends \core_availability\condition {
             'warning_edit_required' => isset($this->warning_edit_required) ? 1 : 0,
         ];
 
-        return $OUTPUT->render_from_template('block_gps/condition-button', $params);
+        return $OUTPUT->render_from_template('availability_gps/condition-button', $params);
     }
 
     protected function get_debug_string() {
