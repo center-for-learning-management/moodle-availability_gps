@@ -62,7 +62,7 @@ class condition extends \core_availability\condition {
             }
         }
         if (empty($askedonce)) {
-            $PAGE->requires->js_call_amd('block_gps/geoassist', 'locate');
+            $PAGE->requires->js_call_amd('block_gps/geoassist', 'locate', [ 'once' => 1 ]);
             \block_gps\locallib::cache_set('session', 'asked_for_location_once', true);
         }
     }
