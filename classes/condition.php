@@ -42,7 +42,7 @@ class condition extends \core_availability\condition {
     protected $reveal; // Whether or not to show coordinates to users.
 
     public function __construct($structure) {
-        global $CFG, $PAGE;
+        global $CFG, $COURSE, $OUTPUT, $PAGE;
         $this->accuracy = $structure->accuracy;
         $this->longitude = $structure->longitude;
         $this->latitude = $structure->latitude;
@@ -50,6 +50,7 @@ class condition extends \core_availability\condition {
         $this->reveal = $structure->reveal;
         $this->revealname = $structure->revealname;
 
+        $bannerinjected = \block_gps\locallib::cache_get('request', 'bannerinjected');
         $initialized = \block_gps\locallib::cache_get('request', 'location_initialized');
         $askedonce = \block_gps\locallib::cache_get('session', 'asked_for_location_once');
         $setinterval = \block_gps\locallib::cache_get('session', 'setinterval');
@@ -61,10 +62,19 @@ class condition extends \core_availability\condition {
                 $PAGE->requires->js_call_amd('block_gps/geoassist', 'interval', [ 'ms' => $setinterval]);
             }
         }
+        if (empty($bannerinjected)) {
+            $PAGE->requires->js_call_amd('block_gps/geoassist', 'injectBanner', [ ]);
+            \block_gps\locallib::cache_set('request', 'bannerinjected', true);
+        }
+        /*
+         * it was reported that this feature could be unsettling for users. Therefore, it has been disabled for
+         * the time being. Possible solutions in the future: activatable via admin setting or a banner above the
+         * course page with a notice.
         if (empty($askedonce)) {
             $PAGE->requires->js_call_amd('block_gps/geoassist', 'locate', [ 'once' => 1 ]);
             \block_gps\locallib::cache_set('session', 'asked_for_location_once', true);
         }
+        */
     }
 
     public function save() {
