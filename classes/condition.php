@@ -62,8 +62,8 @@ class condition extends \core_availability\condition {
                 $PAGE->requires->js_call_amd('block_gps/geoassist', 'interval', [ 'ms' => $setinterval]);
             }
         }
-        if (empty($bannerinjected)) {
-            $PAGE->requires->js_call_amd('block_gps/geoassist', 'injectBanner', [ ]);
+        if (empty($bannerinjected) && strpos($_SERVER["SCRIPT_FILENAME"], '/course/view.php') > 0) {
+            $PAGE->requires->js_call_amd('block_gps/geoassist', 'injectBanner', [ 'courseid' => $COURSE->id ]);
             \block_gps\locallib::cache_set('request', 'bannerinjected', true);
         }
         /*
