@@ -94,7 +94,7 @@ M.availability_gps.form.getNode = function(json) {
     html.push('        <div style="position: absolute; z-index: 999; right: 15px; top: 15px;">');
 
     //html.push(             strings.selectfrommapdrag);
-    html.push('            <a href="#" onclick="' + requirehelper + '; return false;" class="btn btn-primary">');
+    html.push('            <a href="#" onclick="' + requirehelper + '; return false;" class="btn btn-secondary" style="color: unset;">');
     html.push('                <i class="fa fa-map-marker"></i>&nbsp;' + strings.current_location_set);
     html.push('            </a>');
     html.push('        </div>');
