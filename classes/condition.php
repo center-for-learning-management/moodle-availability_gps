@@ -149,8 +149,6 @@ class condition extends \core_availability\condition {
     }
 
     public function get_description($full, $not, \core_availability\info $info) {
-        global $CFG, $OUTPUT;
-
         $userposition = (object)array(
             'longitude' => \block_gps\locallib::get_location('longitude'),
             'latitude' => \block_gps\locallib::get_location('latitude'),
@@ -174,7 +172,7 @@ class condition extends \core_availability\condition {
             'warning_edit_required' => isset($this->warning_edit_required) ? 1 : 0,
         ];
 
-        return $OUTPUT->render_from_template('availability_gps/condition-button', $params);
+        return \availability_gps\button::render($params);
     }
 
     protected function get_debug_string() {
