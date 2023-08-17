@@ -23,8 +23,6 @@
  */
 namespace availability_gps;
 
-defined('MOODLE_INTERNAL') || die();
-
 class frontend extends \core_availability\frontend {
     protected function get_javascript_strings() {
         // You can return a list of names within your language file and the
