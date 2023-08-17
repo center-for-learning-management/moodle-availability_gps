@@ -24,8 +24,6 @@
 
 namespace availability_gps;
 
-defined('MOODLE_INTERNAL') || die();
-
 /**
  * Condition main class.
  *
