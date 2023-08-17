@@ -50,7 +50,7 @@ M.availability_gps.form.getNode = function(json) {
     var checkedrevealname = (json.revealname == 1) ? ' checked="checked"' : '';
 
     this.nodesSoFar++;
-    <!-- eslint-disable max-len -->
+    /* eslint-disable max-len */ 
     html = [];
     html.push('<div class="availability_gps">');
     html.push('    <div class="alert alert-info">' + strings.notify_block + '</div>');
@@ -74,7 +74,7 @@ M.availability_gps.form.getNode = function(json) {
     html.push('                <tr>');
     html.push('                    <td>' + strings.accuracy + '</td>');
     html.push('                    <td><select name="accuracy" style="width: 100%; max-width: 160px;">');
-    <!-- eslint-enable max-len -->
+    /* eslint-enable max-len */ 
     var options = [5, 10, 50, 100, 500, 1000, 5000, 10000, 20000];
     var sm = ' ' + strings.meters;
     var sk = ' ' + strings.kilometers;
