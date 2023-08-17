@@ -50,7 +50,6 @@ M.availability_gps.form.getNode = function(json) {
     var checkedrevealname = (json.revealname == 1) ? ' checked="checked"' : '';
 
     this.nodesSoFar++;
-
     /* eslint-disable max-len */
     html = [];
     html.push('<div class="availability_gps">');
@@ -76,7 +75,6 @@ M.availability_gps.form.getNode = function(json) {
     html.push('                    <td>' + strings.accuracy + '</td>');
     html.push('                    <td><select name="accuracy" style="width: 100%; max-width: 160px;">');
     /* eslint-enable max-len */
-
     var options = [5, 10, 50, 100, 500, 1000, 5000, 10000, 20000];
     var sm = ' ' + strings.meters;
     var sk = ' ' + strings.kilometers;
@@ -85,7 +83,6 @@ M.availability_gps.form.getNode = function(json) {
         selected = ((json.accuracy == options[a])?' selected':'');
         html.push('       <option value="' + options[a] + '"' + selected + '> ' + captions[a] + '</option>');
     }
-
     /* eslint-disable max-len */
     html.push('                    </select></td>');
     html.push('                </tr>');
@@ -97,16 +94,18 @@ M.availability_gps.form.getNode = function(json) {
     html.push('            <input name="revealname" type="checkbox"' + checkedrevealname + ' /> ' + strings.revealname);
     html.push('        </div>');
     html.push('    </div>');
+
     html.push('    <div class="hidden" id="availability_gps_map" style="height: 440px; border: 1px solid #AAA;">');
     html.push('        <div style="position: absolute; z-index: 999; right: 15px; top: 15px;">');
     html.push('            <a href="#" onclick="' + requirehelper + '; return false;" class="btn btn-secondary" style="color: unset;">');
     html.push('                <i class="fa fa-map-marker"></i>&nbsp;' + strings.current_location_set);
+
+    //html.push(             strings.selectfrommapdrag);
     html.push('            </a>');
     html.push('        </div>');
     html.push('    </div>');
     html.push('</div>');
     /* eslint-enable max-len */
-
     var node = Y.Node.create(html.join(''));
 
     if (!M.availability_gps.form.addedEvents) {
