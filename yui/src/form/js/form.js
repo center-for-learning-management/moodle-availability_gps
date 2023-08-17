@@ -50,13 +50,13 @@ M.availability_gps.form.getNode = function(json) {
     var checkedrevealname = (json.revealname == 1) ? ' checked="checked"' : '';
 
     this.nodesSoFar++;
+    <!-- eslint-disable max-len -->
     html = [];
     html.push('<div class="availability_gps">');
     html.push('    <div class="alert alert-info">' + strings.notify_block + '</div>');
     html.push('    <div class="row">');
     html.push('        <div class="col-md-2">');
-    html.push('            <a href="#" onclick="' + requiremap + '; return false;"
-              class="btn btn-secondary" style="text-align: center;">');
+    html.push('            <a href="#" onclick="' + requiremap + '; return false;" class="btn btn-secondary" style="text-align: center;">');
     html.push('                <i class="fa fa-map" style="font-size: 30px; vertical-align: middle;"></i><br />');
     html.push(                 strings.selectfrommap);
     html.push('            </a>');
@@ -65,17 +65,16 @@ M.availability_gps.form.getNode = function(json) {
     html.push('            <table>');
     html.push('                <tr>');
     html.push('                    <td>' + strings.latitude + '</td>');
-    html.push('                    <td><input type="text" name="latitude" value="' + json.latitude + '"
-              size="18" style="width: 100%; max-width: 160px;"/></td>');
+    html.push('                    <td><input type="text" name="latitude" value="' + json.latitude + '" size="18" style="width: 100%; max-width: 160px;"/></td>');
     html.push('                </tr>');
     html.push('                <tr>');
     html.push('                    <td>' + strings.longitude + '</td>');
-    html.push('                    <td><input type="text" name="longitude" value="' + json.longitude + '" 
-              size="18" style="width: 100%; max-width: 160px;"/></td>');
+    html.push('                    <td><input type="text" name="longitude" value="' + json.longitude + '" size="18" style="width: 100%; max-width: 160px;"/></td>');
     html.push('                </tr>');
     html.push('                <tr>');
     html.push('                    <td>' + strings.accuracy + '</td>');
     html.push('                    <td><select name="accuracy" style="width: 100%; max-width: 160px;">');
+    <!-- eslint-enable max-len -->
     var options = [5, 10, 50, 100, 500, 1000, 5000, 10000, 20000];
     var sm = ' ' + strings.meters;
     var sk = ' ' + strings.kilometers;
