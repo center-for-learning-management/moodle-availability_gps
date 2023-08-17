@@ -24,8 +24,6 @@
 
 namespace availability_gps;
 
-defined('MOODLE_INTERNAL') || die();
-
 /**
  * Condition main class.
  *
@@ -62,7 +60,7 @@ class condition extends \core_availability\condition {
                 $PAGE->requires->js_call_amd('block_gps/geoassist', 'interval', [ 'ms' => $setinterval]);
             }
         }
-        if (empty($bannerinjected) && 
+        if (empty($bannerinjected) &&
                 (strpos($_SERVER["SCRIPT_FILENAME"], '/course/view.php') > 0 ||
                 $PAGE->bodyid == 'page-site-index')) {
             $courseid = optional_param('id', 1, PARAM_INT);
