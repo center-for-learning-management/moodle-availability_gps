@@ -5,7 +5,9 @@ M.availability_gps.vals = [ 'accuracy', 'longitude', 'latitude', 'persistent', '
 M.availability_gps.form = Y.Object(M.core_availability.plugin);
 
 M.availability_gps.form.initInner = function(longitude, latitude, accuracy, persistent, reveal, revealname) {
+    /* eslint-disable no-console */
     console.log('initInner: ', longitude, latitude, accuracy, persistent, reveal, revealname);
+    /* eslint-enable no-console */
     this.nodesSoFar = 0;
     require(['core/url'], function(url) {
         var l1, l2;
@@ -53,7 +55,8 @@ M.availability_gps.form.getNode = function(json) {
     html.push('    <div class="alert alert-info">' + strings.notify_block + '</div>');
     html.push('    <div class="row">');
     html.push('        <div class="col-md-2">');
-    html.push('            <a href="#" onclick="' + requiremap + '; return false;" class="btn btn-secondary" style="text-align: center;">');
+    html.push('            <a href="#" onclick="' + requiremap + '; return false;"
+              class="btn btn-secondary" style="text-align: center;">');
     html.push('                <i class="fa fa-map" style="font-size: 30px; vertical-align: middle;"></i><br />');
     html.push(                 strings.selectfrommap);
     html.push('            </a>');
@@ -62,11 +65,13 @@ M.availability_gps.form.getNode = function(json) {
     html.push('            <table>');
     html.push('                <tr>');
     html.push('                    <td>' + strings.latitude + '</td>');
-    html.push('                    <td><input type="text" name="latitude" value="' + json.latitude + '" size="18" style="width: 100%; max-width: 160px;"/></td>');
+    html.push('                    <td><input type="text" name="latitude" value="' + json.latitude + '"
+              size="18" style="width: 100%; max-width: 160px;"/></td>');
     html.push('                </tr>');
     html.push('                <tr>');
     html.push('                    <td>' + strings.longitude + '</td>');
-    html.push('                    <td><input type="text" name="longitude" value="' + json.longitude + '" size="18" style="width: 100%; max-width: 160px;"/></td>');
+    html.push('                    <td><input type="text" name="longitude" value="' + json.longitude + '" 
+              size="18" style="width: 100%; max-width: 160px;"/></td>');
     html.push('                </tr>');
     html.push('                <tr>');
     html.push('                    <td>' + strings.accuracy + '</td>');
