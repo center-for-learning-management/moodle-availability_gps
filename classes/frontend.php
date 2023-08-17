@@ -28,9 +28,9 @@ defined('MOODLE_INTERNAL') || die();
 class frontend extends \core_availability\frontend {
     protected function get_javascript_strings() {
         // You can return a list of names within your language file and the
-        // system will include them here. (Should you need strings from another
+        // system will include them here. Should you need strings from another
         // language file, you can also call $PAGE->requires->strings_for_js
-        // manually from here.)
+        // manually from here.
         return array(
             "accuracy", "current_location_set", "geolocation_not_supported", "kilometers",
             "latitude", "loading", "longitude", "meters", "no", "notify_block",
