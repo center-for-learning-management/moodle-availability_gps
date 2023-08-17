@@ -34,7 +34,7 @@ defined('MOODLE_INTERNAL') || die();
  * @author Robert Schrenk
  * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-class button  {
+class button {
     public static function render($params) {
         $lines = [];
         $lines[] = "<span class=\"availability_gps_condition_button\">";
