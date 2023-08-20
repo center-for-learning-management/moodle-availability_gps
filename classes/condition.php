@@ -24,8 +24,6 @@
 
 namespace availability_gps;
 
-defined('MOODLE_INTERNAL') || die();
-
 /**
  * Condition main class.
  *
@@ -35,7 +33,7 @@ defined('MOODLE_INTERNAL') || die();
  * @license http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class condition extends \core_availability\condition {
-    protected $accuracy; // Accuracy in m
+    protected $accuracy; // Accuracy in meter!
     protected $longitude;
     protected $latitude;
     protected $persistent; // Stay visible when detected once.
@@ -62,7 +60,9 @@ class condition extends \core_availability\condition {
                 $PAGE->requires->js_call_amd('block_gps/geoassist', 'interval', [ 'ms' => $setinterval]);
             }
         }
-        if (empty($bannerinjected) && (strpos($_SERVER["SCRIPT_FILENAME"], '/course/view.php') > 0 || $PAGE->bodyid == 'page-site-index')) {
+        if (empty($bannerinjected) &&
+                (strpos($_SERVER["SCRIPT_FILENAME"], '/course/view.php') > 0 ||
+                $PAGE->bodyid == 'page-site-index')) {
             $courseid = optional_param('id', 1, PARAM_INT);
             if (!empty($courseid)) {
                 $course = \get_course($courseid);
@@ -124,11 +124,11 @@ class condition extends \core_availability\condition {
         $chkdist = ($distance > -1 && $distance < $this->accuracy);
 
         $chkpersistent = false;
-        if(!empty($this->persistent) && !isguestuser($userid) && (!empty($cmid) || !empty($sectionid))) {
+        if (!empty($this->persistent) && !isguestuser($userid) && (!empty($cmid) || !empty($sectionid))) {
             $entry = $DB->get_record('block_gps_reached', array('cmid' => $cmid, 'userid' => $userid, 'sectionid' => $sectionid));
             if (isset($entry->id) && $entry->id > 0) {
                 $chkpersistent = true;
-            } elseif ($chkdist && empty($this->warning_edit_required)) {
+            } else if ($chkdist && empty($this->warning_edit_required)) {
                 $entry = (object) array(
                     'cmid' => $cmid,
                     'sectionid' => $sectionid,
@@ -160,9 +160,9 @@ class condition extends \core_availability\condition {
         $distance = \block_gps\locallib::get_distance($userposition, $conditionposition);
 
         $params = (object)[
-            'accuracy' => ($this->accuracy > 1000) ? $this->accuracy/1000 : $this->accuracy,
+            'accuracy' => ($this->accuracy > 1000) ? $this->accuracy / 1000 : $this->accuracy,
             'accuracylabel' => ($this->accuracy > 1000) ? get_string('kilometers', 'block_gps') : get_string('meters', 'block_gps'),
-            'distance' => ($distance > 1000) ? round($distance / 1000,1) : $distance,
+            'distance' => ($distance > 1000) ? round($distance / 1000, 1) : $distance,
             'distanceerror' => ($distance == -1) ? 1 : 0,
             'distancelabel' => ($distance > 1000) ? get_string('kilometers', 'block_gps') : get_string('meters', 'block_gps'),
             'latitude' => round($this->latitude, 5),
