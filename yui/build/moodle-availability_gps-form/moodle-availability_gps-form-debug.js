@@ -1,3 +1,5 @@
+YUI.add('moodle-availability_gps-form', function (Y, NAME) {
+
 M.availability_gps = M.availability_gps || {};
 
 M.availability_gps.vals = [ 'accuracy', 'longitude', 'latitude', 'persistent', 'reveal', 'revealname'];
@@ -160,3 +162,6 @@ M.availability_gps.form.fillErrors = function(errors, node) {
     }
 };
 */
+
+
+}, '@VERSION@', {"requires": ["base", "node", "event", "moodle-core_availability-form"]});
